@@ -1,0 +1,31 @@
+import numpy as np
+
+Bases = ('A-T;', 'C-G;', 'T-A;', 'G-C;')
+
+def random_dna_sequence(length):
+    return ''.join(np.random.choice(Bases) for _ in range(length))
+print ('Последовательностей:')
+n = int(input())
+print ('Длина:')
+m = int(input())
+a=0
+t=0
+c=0
+g=0
+s=0
+k=0
+with open('dna.txt', 'w+') as txtout:
+    for _ in range(n):
+        dna = random_dna_sequence(m)
+        txtout.write(dna)
+        txtout.write("\n")
+        print (dna)
+        a=a+dna.count('A')
+        t=t+dna.count('T')
+        c=c+dna.count('C')
+        g=g+dna.count('G')
+        s=s+dna.count('G-C')+dna.count('C-G;')
+        k=k+dna.count('A-T;')+dna.count('T-A;')+dna.count('G-C;')+dna.count('C-G;')
+k=s/k*100
+print('Количество A оснований',a),print('Количество T оснований',t),print('Количество C оснований',c)
+print('Количество G оснований',g),print('Количество GC оснований',s),print('Количество GC оснований (%)',k)
